@@ -1,0 +1,17 @@
+<!DOCTYPE HTML>
+<HTML>
+	<HEAD>
+		<TITLE>Home upload</TITLE>
+		<LINK TYPE="text/css" REL="stylesheet" HREF="static\style.css">
+	</HEAD>
+	<BODY ALIGN="CENTER">
+        <H1>Welcome to Energy Consumption Analysis System</H1>
+		<FORM ACTION="http://localhost:5000/uploader" METHOD="POST" ENCTYPE="multipart/form-data">
+			<DIV CLASS="container">
+			<INPUT TYPE="FILE" NAME="file" CLASS="input" allowed="csv,xls">
+			<BR><BR>
+    		<INPUT TYPE="SUBMIT">
+			</DIV>
+        </FORM>
+	</BODY>
+</HTML>
