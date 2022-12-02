@@ -1,0 +1,79 @@
+mysql> DELETE FROM useran WHERE uname !='user100';
+Query OK, 2 rows affected (0.09 sec)
+
+mysql> SELECT * FROM useran;
++---------+---------+--------------------+
+| uname   | phno    | predictval         |
++---------+---------+--------------------+
+| user100 | 3545821 | 1451624502.6438186 |
++---------+---------+--------------------+
+1 row in set (0.00 sec)
+
+cd Program Files\mysql-8.0.29-winx64\bin
+
+mysql -u root -p
+
+USE flaskprojectdb
+
+SELECT * FROM useran;
+
+DELETE FROM useran WHERE uname !='user100';
+
+
+mysql> DROP TABLE useran;
+Query OK, 0 rows affected (0.37 sec)
+
+CREATE TABLE useran(userid INT PRIMARY KEY, uname VARCHAR(50), phno INT(25));
+
+CREATE TABLE userlog(logid INT PRIMARY KEY, sessionid INT, date DATE, time TIME, predictval DOUBLE(25), userid INT FOREIGN KEY (userid) REFERENCES useran(userid));
+
+CREATE TABLE userlog(logid INT PRIMARY KEY, sessionid VARCHAR(25), date DATE, time TIME, predictval FLOAT(25), userid INT);
+
+ALTER TABLE userlog ADD CONSTRAINT userid FOREIGN KEY (userid) REFERENCES useran(userid);
+
+INSERT INTO useran VALUES(1,"user100","384652");
+
+INSERT INTO userlog VALUES(100,"6851","02/03/2006","15:16",846812.615311,1);
+
+mysql> DESCRIBE useran;  
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| userid | int(11)     | NO   | PRI | NULL    |       |
+| uname  | varchar(50) | YES  |     | NULL    |       |
+| phno   | int(25)     | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+mysql> DESCRIBE userlog; 
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| logid      | int(11)     | NO   | PRI | NULL    |       |
+| sessionid  | varchar(25) | YES  |     | NULL    |       |
+| date       | date        | YES  |     | NULL    |       |
+| time       | time        | YES  |     | NULL    |       |
+| predictval | double      | YES  |     | NULL    |       |
+| userid     | int(11)     | YES  | MUL | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+6 rows in set (0.03 sec)
+
+mysql> SELECT * FROM useran,userlog WHERE userlog.logid = 100;
++--------+---------+--------+-------+-----------+------------+----------+---------------+--------+
+| userid | uname   | phno   | logid | sessionid | date       | time     | predictval    | userid |
++--------+---------+--------+-------+-----------+------------+----------+---------------+--------+
+|      1 | user100 | 384652 |   100 | 6851      | 0000-00-00 | 15:16:00 | 846812.615311 |      1 |
++--------+---------+--------+-------+-----------+------------+----------+---------------+--------+
+1 row in set (0.00 sec)
+
+mysql> ALTER TABLE userlog MODIFY COLUMN logid VARCHAR(25);
+Query OK, 4 rows affected, 3 warnings (8.21 sec)
+Records: 4  Duplicates: 0  Warnings: 3
+
+mysql> SELECT * FROM useran JOIN userlog ON useran.userid = userlog.userid WHERE useran.userid = 2; 
++--------+----------+-----------+-------+-----------+------------+----------+-------------+--------+
+| userid | uname    | phno      | logid | sessionid | date       | time     | predictval  | userid |
++--------+----------+-----------+-------+-----------+------------+----------+-------------+--------+
+|      2 | usekr100 | 385344652 |   200 | 6851      | 0000-00-00 | 16:18:37 | 846542.6151 |      2 |
++--------+----------+-----------+-------+-----------+------------+----------+-------------+--------+
+1 row in set (0.00 sec)

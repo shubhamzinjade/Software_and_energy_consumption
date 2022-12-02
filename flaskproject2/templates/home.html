@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<HTML>
+	<HEAD>
+		<TITLE>Home</TITLE>
+		<LINK TYPE="text/css" REL="stylesheet" HREF="static\style.css">
+		<SCRIPT SRC="static\jquery.js"></SCRIPT>
+		<SCRIPT>
+			$(document).ready(function()
+			{
+				$(document.body).hide();
+				$(document.body).fadeIn(500);
+			});
+		</SCRIPT>
+	</HEAD>
+	<BODY>
+		<DIV CLASS="container">
+		<FORM ALIGN="CENTER" ACTION="http://localhost:5000/uploader" METHOD="POST" ENCTYPE="multipart/form-data">
+		<!-- <DIV CLASS="container"> -->
+            <H1>Welcome to Energy Consumption Analysis System</H1>
+			<INPUT TYPE="TEXT" NAME="uname" PLACEHOLDER="Name" CLASS="input">
+			<BR><BR>
+			<INPUT TYPE="TEXT" NAME="phno" PLACEHOLDER="Phone number" CLASS="input">
+            <BR><BR>
+			<INPUT TYPE="FILE" NAME="file" CLASS="input" ACCEPT=".csv,.xls,.xlsx">
+			<BR><BR>
+    		<INPUT TYPE="SUBMIT">
+        </FORM>
+		</DIV>
+	</BODY>
+</HTML>
